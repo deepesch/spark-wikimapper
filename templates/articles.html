@@ -1,0 +1,18 @@
+<mtml>
+    <head>
+        <title> Articles Page </title>
+
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='signin.css') }}"></head>  
+    <body>
+<div class="container">
+<ul>
+{% for entry in wikilist %}
+  <li><h2>{{entry}}</h2>
+</li>
+{% endfor %}
+</ul>
+
+    </div> <!-- /container -->
+    </body>
+</html>
