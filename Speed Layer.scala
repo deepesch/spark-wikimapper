@@ -1,9 +1,9 @@
 // Databricks notebook source exported at Tue, 8 Mar 2016 20:55:09 UTC
-// MAGIC %md
-// MAGIC 
-// MAGIC #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
-// MAGIC 
-// MAGIC # Wikipedia top editors
+// %md
+// 
+// #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
+// 
+// # Wikipedia top editors
 
 // COMMAND ----------
 
@@ -31,7 +31,7 @@ sc
 
 // COMMAND ----------
 
-// MAGIC %md Create a new `StreamingContext`, using the SparkContext and batch interval:
+// %md Create a new `StreamingContext`, using the SparkContext and batch interval:
 
 // COMMAND ----------
 
@@ -39,7 +39,7 @@ val ssc = new StreamingContext(sc, BatchInterval)
 
 // COMMAND ----------
 
-// MAGIC %md ####Create one Dstream for English and another for a language
+// %md ####Create one Dstream for English and another for a language
 
 // COMMAND ----------
 
@@ -51,7 +51,7 @@ val baseDeDSTREAM = ssc.socketTextStream(MiscLangStreamingServerHost, GermanStre
 
 // COMMAND ----------
 
-// MAGIC %md For each DStream, parse the incoming JSON and register a new temporary table every batch interval:
+// %md For each DStream, parse the incoming JSON and register a new temporary table every batch interval:
 
 // COMMAND ----------
 
@@ -80,38 +80,38 @@ ssc.start
 
 // COMMAND ----------
 
-// MAGIC %sql select * from English_Edits
+// %sql select * from English_Edits
 
 // COMMAND ----------
 
-// MAGIC %sql select * from German_Edits
+// %sql select * from German_Edits
 
 // COMMAND ----------
 
-// MAGIC %sql select count(*) from English_Edits
+// %sql select count(*) from English_Edits
 
 // COMMAND ----------
 
-// MAGIC %sql 
-// MAGIC select "English" AS language, substring(timestamp, 0, 19) as timestamp, count(*) AS count from English_Edits GROUP BY timestamp UNION ALL
-// MAGIC select "German" AS language, substring(timestamp, 0, 19) as timestamp, count(*) AS count from German_Edits GROUP BY timestamp; 
+// %sql 
+// select "English" AS language, substring(timestamp, 0, 19) as timestamp, count(*) AS count from English_Edits GROUP BY timestamp UNION ALL
+// select "German" AS language, substring(timestamp, 0, 19) as timestamp, count(*) AS count from German_Edits GROUP BY timestamp; 
 
 // COMMAND ----------
 
-// MAGIC %md ###SQL Query to get most active users by filtering bots & anonymous users(IP Addresses) 
+// %md ###SQL Query to get most active users by filtering bots & anonymous users(IP Addresses) 
 
 // COMMAND ----------
 
-// MAGIC 
-// MAGIC %sql 
-// MAGIC 
-// MAGIC SELECT 
-// MAGIC user, count(user)
-// MAGIC FROM English_edits 
-// MAGIC WHERE user NOT REGEXP '[b|Bot|^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$]' 
-// MAGIC GROUP BY user 
-// MAGIC ORDER BY count(user) DESC
-// MAGIC limit 10;
+// 
+// %sql 
+// 
+// SELECT 
+// user, count(user)
+// FROM English_edits 
+// WHERE user NOT REGEXP '[b|Bot|^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$]' 
+// GROUP BY user 
+// ORDER BY count(user) DESC
+// limit 10;
 
 // COMMAND ----------
 
@@ -119,7 +119,7 @@ ssc.start
 
 // COMMAND ----------
 
-// MAGIC %md ###Export CSV
+// %md ###Export CSV
 
 // COMMAND ----------
 
